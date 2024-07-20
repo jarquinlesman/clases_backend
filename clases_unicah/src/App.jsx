@@ -5,8 +5,15 @@ function App() {
 
   useEffect(() => {
     fetch('/api/bloques')
-      .then(response => response.json())
-      .then(data => setBloques(data));
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setBloques(data);
+      })
+      .catch(error => {
+        console.error('Error fetching bloques:', error);
+      });
   }, []);
 
   return (
@@ -14,7 +21,9 @@ function App() {
       <h1>Datos de la Tabla Bloques</h1>
       <ul>
         {bloques.map((bloque, index) => (
-          <li key={index}><b>Código del bloque:</b> {bloque.codigo_bloque}; <b>Nombre del bloque:</b> {bloque.nombre_bloque}</li>
+          <li key={index}>
+            <b>Código del bloque:</b> {bloque.codigo_bloque}; <b>Nombre del bloque:</b> {bloque.nombre_bloque}
+          </li>
         ))}
       </ul>
     </div>
