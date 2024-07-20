@@ -5,28 +5,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const app = express();
-const port = 3000;
-
-app.use(cors());
-app.use(express.json());
-
-//Crear la Conexión a la base de datos con las variables de entorno
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-});
-
-db.connect(err => {
-    if (err) {
-        console.error('Error conectando a la base de datos:', err);
-        return;
-    }
-    console.log('Conectado a la base de datos MySQL');
-});
-
 //obtener los datos de la bd
 app.get('/api/bloques', (req, res) => {
     db.query('SELECT * FROM bloque', (err, results) => {
@@ -103,8 +81,4 @@ app.delete('/api/bloques/:codigo_bloque', (req, res) => {
             return res.status(500).send('Error en la consulta');
         }
     });
-});
-
-app.listen(port, () => {
-    console.log(`Servidor backend ejecutándose en http://localhost:${port}`);
 });
