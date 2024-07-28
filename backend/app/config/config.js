@@ -3,7 +3,7 @@
 module.exports = {
     PORT: process.env.PORT || 3300,
     HOST: process.env.DB || '127.0.0.1',
-    DB: 'BD_Clases_Ivis',
+    DB: 'Clases',
     USER: 'root',
     PASSWORD: '',
     DIALECT: 'mysql',

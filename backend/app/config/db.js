@@ -1,23 +1,14 @@
 'use strict'
 
-const config = require("../config/config");
-const Sequelize = require("sequelize");
+const mysql = require('mysql2');
 
-const SequelizeInstance = new Sequelize(config.DB, config.USER, config.PASSWORD, {
-    host: config.HOST,
-    dialect: config.DIALECT,
-    operatorsAliases: false,
-    pool: {
-        max: config.POOL_MAX,
-        min: config.POOL_MIN,
-        acquire: config.POOL_ACQUIRE,
-        idle: config.POOL_IDLE
-    }
+// Configura la conexión a la base de datos
+const pool = mysql.createPool({
+  host: 'localhost', // Cambia esto si tu base de datos está en otro lugar
+  user: 'root',      // Cambia esto si usas otro usuario
+  password: '',      // Cambia esto si usas otra contraseña
+  database: 'clases' // Cambia esto al nombre de tu base de datos
 });
 
-const db = {};
-
-db.Sequelize = Sequelize;
-db.SequelizeInstance = SequelizeInstance;
-
-module.exports = db;
+// Exporta el pool para usarlo en otros archivos
+module.exports = pool.promise(); // Usa `.promise()` para trabajar con Promesas
