@@ -13,9 +13,11 @@ App.use(express.urlencoded({ extended: false }));
 const clases = require('./routes/clasesRoute');
 const detalle_periodo = require('./routes/detalle_periodoRoute');
 const periodo = require('./routes/periodoRoute');
+const clase_docente = require('./routes/clases_docenteRoute');
 
 App.use('/api', clases);
 App.use('/api', detalle_periodo);
 App.use('/api', periodo);
+App.use('/api', clase_docente);
 
 module.exports = App;
